@@ -1,0 +1,77 @@
+.navbar-inverse .navbar-inner {
+	background-image: linear-gradient(to bottom, #444, #222);
+}
+
+.navbar .nav > li > a, .navbar .nav > li > a:focus {
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.navbar-fixed-top {
+	box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+.mainLayout {
+    margin-top: 120px;
+}
+
+.footer {
+	background: #0088cc;
+	height: auto;
+	padding: 10px 0;
+}
+
+.footer a, .footer a:visited {
+	color: #fff;
+	text-decoration: none;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 0.9em;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.footer a:hover, .footer a.active {
+	text-decoration: underline;
+}
+
+h2 {
+	text-shadow: 0 2px 1px rgba(0, 0, 0, 0.25);
+}
+
+p {
+	text-align: justify;
+}
+
+.breadcrumb {
+    background-color: transparent;
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+.breadcrumb i {
+}
+
+.alphabet a, .alphabet a:visited {
+	color: #0088cc;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.alphabet a:hover, .alphabet a.active {
+	color: #fff;
+	text-decoration: underline;
+}
+
+.bs-docs-sidenav > li.head {
+	padding: 10px;
+}
+
+.leftSidebar .block .head, .leftSidebar .nav li.head {
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+	font-size: 1.2em;
+}
+
+.block {
+	border: 1px solid #e5e5e5;
+}
+.bs-docs-sidenav, .leftSidebar .block, .mainLayout > .span9 > .block {
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar form { margin: 5px 0 0 0; }
