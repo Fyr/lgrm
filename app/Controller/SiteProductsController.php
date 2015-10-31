@@ -54,6 +54,7 @@ class SiteProductsController extends AppController {
 		}
 		$id = $article['Product']['id'];
 		$this->set('article', $article);
+		$this->set('category', array('CategoryProduct' => $article['Category']));
 		$aMedia = $this->Media->getObjectList('Product', $id);
 		
 		// for bin-file we just upload an image with the same name + _thumb
