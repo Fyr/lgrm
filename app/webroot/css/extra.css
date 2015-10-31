@@ -75,3 +75,29 @@ p {
 }
 
 .navbar form { margin: 5px 0 0 0; }
+
+hr { margin: 0 0 10px 0; }
+.thumb {margin: 0 10px 10px 0;}
+
+.block hr:last-child { display: none; }
+
+.table-bordered { border-left: 1px solid #dddddd; }
+.tableContent .table-bordered th, .table-bordered td {
+    border-left: 1px solid #dddddd;
+}
+.tableContent .table-gradient {
+    background-color: #3f6d70;
+    background-image: linear-gradient(to bottom, #5a8f92 0%, #326263 100%);
+}
+
+.block .grid-unsortable, .block .grid-unsortable:visited, .block .grid-unsortable:hover { color: #fff; }
+
+.brand-logo { width: 30px; }
+
+.block .table-bordered th, .block .table-bordered td {
+    border-left: 1px solid #dddddd;
+}
+.block .table-gradient {
+    background-color: ##0088cc;
+    background-image: linear-gradient(to bottom, #0088cc 0%, #0088cc 100%);
+}

@@ -1,27 +1,43 @@
-								<ul class="main_news_list">
 <?
-	foreach($products as $article) {
-		$this->ArticleVars->init($article, 'Product', $url, $title, $teaser, $src, '315x');
+	$title = $this->ObjectType->getTitle('index', $objectType);
+	$aBreadCrumbs = array(__('Home') => '/');
+	if (isset($category)) {
+		$aBreadCrumbs[$title] = Router::url(array('action' => 'index', 'objectType' => 'Product'));
+		$aBreadCrumbs[$category['CategoryProduct']['title']] = '';
+		$title.= ': '.$category['CategoryProduct']['title'];
+	} else {
+		$aBreadCrumbs[$title] = '';
+	}
+	echo $this->element('bread_crumbs', compact('aBreadCrumbs'));
+	echo $this->element('title', array('pageTitle' => $title));
 ?>
-									<li class="main_news_li">
-										<div class="main_col_img fixed">
-											<a href="<?=$url?>">
-												<span class="img_item_h"><?=$title?></span>
-												<span class="img_item_price"><?=$article['Product']['price']?>&nbsp;</span>
+<div class="block">
+	
+<?
+	foreach($aArticles as $i => $article) {
+		$this->ArticleVars->init($article, $url, $title, $teaser, $src, '150x');
+?>
+	<div class="media">
 <?
 		if ($src) {
 ?>
-												<img src="<?=$src?>" alt="<?=$title?>">
+		<a class="pull-left" href="<?=$url?>">
+			<img class="media-object thumb" src="<?=$src?>" alt="<?=$title?>">
+		</a>
 <?
 		}
 ?>
-											</a>
-										</div>
-									</li>
+		<div class="media-body">
+			<h4 class="media-heading"><a href="<?=$url?>"><?=$title?></a></h4>
+			<p><?=$teaser?></p>
+			<?=$this->element('more', compact('url'))?>
+		</div>
+	</div>
+	<hr />
 <?
 	}
 ?>
-								</ul>
+</div>
 <?
 	echo $this->element('paginate');
 ?>

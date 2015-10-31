@@ -49,6 +49,7 @@ class ObjectTypeHelper extends AppHelper {
             'view' => array(
             	'Article' => __('View Article'),
             	'News' => __('View News article'),
+            	'Product' => __('View Product')
             )
         );
         return $Titles;

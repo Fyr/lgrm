@@ -32,7 +32,7 @@ class AppController extends Controller {
 		$this->aNavBar = array(
 			'Home' => array('label' => __('Home'), 'href' => array('controller' => 'Pages', 'action' => 'home')),
 			'News' => array('label' => __('News'), 'href' => array('controller' => 'Articles', 'action' => 'index', 'objectType' => 'News')),
-			'Products' => array('label' => __('Products catalogue'), 'href' => array('controller' => 'SiteProducts', 'action' => 'index')),
+			'Products' => array('label' => __('Products'), 'href' => array('controller' => 'SiteProducts', 'action' => 'index', 'objectType' => 'Product')),
 			'Articles' => array('label' => __('Articles'), 'href' => array('controller' => 'Articles', 'action' => 'index', 'objectType' => 'SiteArticle')),
 			'o-proekte' => array('label' => __('About us'), 'href' => array('controller' => 'pages', 'action' => 'view', 'o-proekte.html')),
 			'Contacts' => array('label' => __('Contacts'), 'href' => array('controller' => 'SiteContacts', 'action' => 'index'))
@@ -75,7 +75,7 @@ class AppController extends Controller {
 		$this->set('aSlider', $this->Media->getObjectList('Slider'));
 		
 		$this->loadModel('CategoryProduct');
-		$aCategories = $this->CategoryProduct->find('list'); //getObjectOptions();
+		$aCategories = $this->CategoryProduct->find('all'); //getObjectOptions();
 		$this->set('aCategories', $aCategories);
 		/*
 		$this->loadModel('CategoryProduct');
@@ -84,8 +84,19 @@ class AppController extends Controller {
 		*/
 	}
 	
+	/**
+	 * Sets flashing message
+	 *
+	 * @param str $msg
+	 * @param str $type - must be 'success', 'error' or empty
+	 */
+	protected function setFlash($msg, $type = 'info') {
+		$this->Session->setFlash($msg, 'default', array(), $type);
+	}
+
+	
 	protected function getObjectType() {
 		$objectType = $this->request->param('objectType');
-		return ($objectType && in_array($objectType, array('SiteArticle', 'News'))) ? $objectType : 'SiteArticle';
+		return ($objectType) ? $objectType : 'SiteArticle';
 	}
 }

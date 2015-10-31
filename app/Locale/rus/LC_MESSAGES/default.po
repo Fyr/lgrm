@@ -40,7 +40,7 @@ msgstr "Настройки"
 msgid "Home"
 msgstr "Главная"
 
-msgid "Products catalogue"
+msgid "Products"
 msgstr "Логотипы"
 
 msgid "About us"
@@ -158,7 +158,7 @@ msgid "Subcategory"
 msgstr "Подкатегория"
 
 msgid "Product categories"
-msgstr "Категории продуктов"
+msgstr "Категории услуг"
 
 msgid "CMS Development"
 msgstr "Разработка CMS"
@@ -187,9 +187,6 @@ msgstr "Стат.страницы"
 msgid "Subcategories"
 msgstr "Подкатегории"
 
-msgid "Products"
-msgstr "Продукты"
-
 msgid "Create Static page"
 msgstr "Создать Cтат.страницу"
 
@@ -202,8 +199,17 @@ msgstr "Создать Подкатегорию"
 msgid "Create Product category"
 msgstr "Создать категорию продукта"
 
+msgid "Products"
+msgstr "Логотипы"
+
 msgid "Create Product"
-msgstr "Создать Продукт"
+msgstr "Создать логотип"
+
+msgid "Edit Product"
+msgstr "Редактировать логотип"
+
+msgid "View Product"
+msgstr "Просмотр логотипа"
 
 msgid "Create Article"
 msgstr "Создать Статью"
@@ -234,9 +240,6 @@ msgstr "Редактировать Подкатегорию"
 
 msgid "Edit Product сategory"
 msgstr "Редактировать категорию продукта"
-
-msgid "Edit Product"
-msgstr "Редактировать Продукт"
 
 msgid "Spam protection"
 msgstr "Защита от спама"
@@ -451,35 +454,60 @@ msgstr "Редактировать категорию для статьи"
 msgid "Edit Article subcategory"
 msgstr "Редактировать подкатегорию для статьи"
 
-msgid "Car Types"
-msgstr "Марки ТС"
-
-msgid "Create Car Type"
-msgstr "Создать марку ТС"
-
-msgid "Edit Car Type"
-msgstr "Редактировать марки ТС"
-
-msgid "Car Subsections"
-msgstr "Отсеки ТС"
-
-msgid "Create Car Subsection"
-msgstr "Создать отсек ТС"
-
-msgid "Edit Car Subsection"
-msgstr "Редактировать отсек ТС"
-
-msgid "Car Subtypes"
-msgstr "Модели ТС"
-
-msgid "Create Car Subtype"
-msgstr "Создать модель ТС"
-
-msgid "Edit Car Subtype"
-msgstr "Редактировать модель ТС"
-
 msgid "Featured product"
 msgstr "Спец.предложение"
 
 msgid "Last added logotypes"
 msgstr "Последние добавленные логотипы"
+
+msgid "View logotype %s in original size"
+msgstr "Просмотреть логотип %s в оригинальном размере"
+
+msgid "View logotype %s in original size"
+msgstr "Просмотреть логотип %s в оригинальном размере"
+
+msgid "Logo %s in vector"
+msgstr "Логотип %s в векторе"
+
+msgid "Jan"
+msgstr "Янв"
+
+msgid "Feb"
+msgstr "Фев"
+
+msgid "Mar"
+msgstr "Мар"
+
+msgid "Apr"
+msgstr "Апр"
+
+msgid "May"
+msgstr "Май"
+
+msgid "Jun"
+msgstr "Июн"
+
+msgid "Jul"
+msgstr "Июл"
+
+msgid "Aug"
+msgstr "Авг"
+
+msgid "Sep"
+msgstr "Сен"
+
+msgid "Oct"
+msgstr "Окт"
+
+msgid "Nov"
+msgstr "Ноя"
+
+msgid "Dec"
+msgstr "Дек"
+
+msgid "Today"
+msgstr "Сегодня"
+
+msgid "Yesterday"
+msgstr "Вчера"
+

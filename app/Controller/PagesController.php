@@ -27,6 +27,8 @@ class PagesController extends AppController {
 	}
 	
 	public function view($slug) {
+		$this->request->params['objectType'] = 'Page';
+		
 		$article = $this->Page->findBySlug($slug);
 		$this->set('article', $article);
 		

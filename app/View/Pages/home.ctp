@@ -22,7 +22,6 @@
 	</div>
 </div>
 						<div class="block">
-							<br /><br />
 							<div class="media">
 								<a href="#" class="pull-left">
 									<img class="media-object" src="http://img.tyt.by/620x620s/n/10/0/delta2.jpg" alt="" width="150" />
@@ -33,7 +32,7 @@
 									<p class="text-right"><a href="#" class="btn btn-mini">Подробнее »</a></p>
 								</div>
 							</div>
-							<br /><br />
+							<hr />
 							<a href="#" class="pull-left" style="margin-right: 10px;">
 								<img class="media-object" src="http://img.tyt.by/620x620s/n/10/0/delta2.jpg" alt="" width="300" />
 							</a>

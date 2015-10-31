@@ -5,7 +5,7 @@ class ArticlesController extends AppController {
 	public $uses = array('SiteArticle', 'News');
 	public $helpers = array('ObjectType');
 	
-	const PER_PAGE = 1;
+	const PER_PAGE = 2;
 	
 	protected $objectType;
 

@@ -114,4 +114,16 @@ class MediaPath {
     	return (strpos($size, 'thumb') !== false) ? 'thumb' : 'resize';
     }
     
+	/**
+	* Format to human file size
+	* @param $bytes
+	* @param int $decimals
+	* @return string format to human file size
+	*/
+	public function filesizeFormat($bytes, $decimals = 2) {
+		$sz = array(' bytes', ' Kb', ' Mb', ' Gb', ' Tb', ' Pb');
+		$factor = floor((strlen($bytes) - 1) / 3);
+		return str_replace('.', ',', sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor]);
+	}
+		
 }

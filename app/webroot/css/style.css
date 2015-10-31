@@ -78,11 +78,6 @@ body { background: url('../img/page-background.png') repeat left top; }
     overflow: hidden;
 }
 
-
-.media > .pull-left {
-    margin-right: 10px;
-}
-
 .media-heading {
     margin: 0 0 5px;
 }

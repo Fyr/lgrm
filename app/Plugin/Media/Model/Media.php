@@ -20,7 +20,8 @@ class Media extends AppModel {
     			$_row[$this->alias]['object_type'] = $row['object_type'];
     			$_row[$this->alias]['object_id'] = $row['object_id']; // required for relations btw/ models :(
     			$_row[$this->alias]['media_type'] = $row['media_type'];
-    			$_row[$this->alias]['ext'] = str_replace('.', '', $row['ext']);
+    			$_row[$this->alias]['file'] = $row['file'];
+    			$_row[$this->alias]['ext'] = $row['ext']; // str_replace('.', '', $row['ext']);
     		}
     		if ($row['id']) {
 	    		if ($row['media_type'] == 'image') {
@@ -34,7 +35,6 @@ class Media extends AppModel {
     	}
     	return $results;
     }
-    
 	        
     /**
      * Removes actual media-files before delete a record
@@ -110,25 +110,27 @@ class Media extends AppModel {
 		    @unlink($path['dirname'].'/thumbnail/'.$path['basename']);
 		}
 		
-		if (!isset($media_type) || $media_type == 'image') {
+		$file = $this->PHMedia->getFileName($object_type, $id, null, $file.$ext);
+		$_data = array('id' => $id, 'orig_fsize' => filesize($file));
+		
+		if (isset($media_type) && $media_type == 'image') {
 			// Save original image resolution and file size
-			$file = $this->PHMedia->getFileName($object_type, $id, null, $file.$ext);
-			
 			App::uses('Image', 'Media.Vendor');
 			$image = new Image();
 			$image->load($file);
-			$this->save(array('id' => $id, 'orig_w' => $image->getSizeX(), 'orig_h' => $image->getSizeY(), 'orig_fsize' => filesize($file)));
+			$_data['orig_w'] = $image->getSizeX();
+			$_data['orig_h'] = $image->getSizeY();
+			
 			if ($crop) {
 				//prepare thumb for future operations
 				list($x, $y, $sizeX, $sizeY) = explode(',', $crop);
 				$image->crop($x, $y, $sizeX, $sizeY);
 				$image->outputPng($this->PHMedia->getFileName($object_type, $id, null, 'thumb.png'));
 			}
-			
-			// Set main image if it was first image
-			$this->initMain($object_type, $object_id);
 		}
-		
+		$this->save($_data);
+		// Set main file
+		$this->initMain($object_type, $object_id);
 		return $id;
     }
     
