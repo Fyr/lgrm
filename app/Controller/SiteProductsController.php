@@ -8,7 +8,7 @@ App::uses('PHTimeHelper', 'Core.View/Helper');
 class SiteProductsController extends AppController {
 	public $name = 'SiteProducts';
 	public $uses = array('Media.Media', 'CategoryProduct', 'Product');
-	public $helpers = array('Media.PHMedia', 'Core.PHTime');
+	public $helpers = array('Media.PHMedia', 'Core.PHTime', 'Form.PHForm');
 	
 	const PER_PAGE = 2;
 	
@@ -34,13 +34,11 @@ class SiteProductsController extends AppController {
 			'order' => 'Product.created DESC'
 		);
 		if ($catSlug) {
+			$this->request->data('Category.slug', $catSlug);
 			$this->set('category', $this->CategoryProduct->findBySlug($catSlug));
-			// $this->params->query('data.Category.slug', $catSlug);
-			// $this->params->query['data'] = array('Category.slug' => $catSlug);
 		}
-		if ($data = $this->params->query('data')) {
-			// fdebug(array_merge($this->paginate['conditions'], $this->postConditions($data)));
-			// $this->paginate['conditions'] = array_merge($this->paginate['conditions'], $this->postConditions($data));
+		if ($data = $this->request->data) {
+			$this->paginate['conditions'] = array_merge($this->paginate['conditions'], $this->postConditions($data));
 		}
 		$products = $this->paginate('Product');
 		$this->set('aArticles', $products);

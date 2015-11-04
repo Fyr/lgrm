@@ -6,6 +6,9 @@ class PagesController extends AppController {
 	// public $helpers = array('ArticleVars');
 
 	public function home() {
+		if (!TEST_ENV) {
+			$this->layout = 'soon';
+		}
 		// Welcome block
 		$article = $this->Page->findBySlug('home');
 		$this->set('home_article', $article);

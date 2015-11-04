@@ -7,27 +7,50 @@
 		__('Home') => '/',
 		__('Products') => array('action' => 'index', 'objectType' => 'Product'),
 		$article['Category']['title'] => SiteRouter::url(array('CategoryProduct' => $article['Category'])),
-		// $this->ObjectType->getTitle('index', $objectType) => array('controller' => 'Articles', 'action' => 'index', 'objectType' => $objectType),
 		$this->ObjectType->getTitle('view', $objectType) => ''
 	)));
-	echo $this->element('title', array('pageTitle' => $article[$objectType]['title']));
+	echo $this->element('title', array('pageTitle' => __('Logotype %s', $article[$objectType]['title'])));
 ?>
+
 <div class="block">
-	<div id="sampleLogo" style="float: left; width: 40%; margin: 0 10px 10px 0; border: 1px solid #ddd">
-		<img src="/img/sample-logo.png" alt="" style="width: 100%; " />
-	</div>
 <?
 	if (isset($aMedia['image'])) {
+?>
+	<div style="float: left; width: <?=ceil(count($aMedia['image']) / 3) * 110?>px; margin: 0 10px 10px 0;">
+<?
 		foreach($aMedia['image'] as $media) {
 			$src = $this->Media->imageUrl($media, 'noresize');
-			$thumb = $this->Media->imageUrl($media, '150x150');
+			$thumb = $this->Media->imageUrl($media, '100x100');
 ?>
-	<a class="pull-left" href="javascript:void(0)" rel="logo" onclick="onSelectLogo('<?=$src?>')">
-		<img class="media-object thumb" src="<?=$thumb?>" alt="<?=__('View logotype %s in original size', $article[$objectType]['title'])?>" />
-	</a>
+		<a class="pull-left" href="javascript:void(0)" rel="logo" onclick="onSelectLogo('<?=$src?>')">
+			<img class="media-object thumb" src="<?=$thumb?>" alt="<?=__('View logotype %s in original size', $article[$objectType]['title'])?>" />
+		</a>
 <?
 		}
 ?>
+	</div>
+	<div style="float: left; width: 40%; margin: 0 10px 10px 0;">
+		<img id="sampleLogo" src="/img/sample-logo.png" alt="" style="width: 100%; border: 1px solid #ddd; margin-bottom: 10px;" />
+	</div>
+	
+<?
+	echo $this->Form->create('Params');
+	echo $this->Form->input('size', array(
+		'label' => array('text' => __('Adjust size')),
+		'class' => 'input-small'
+	));
+	echo $this->Form->input('format', array(
+		// 'class' => 'input-small', 
+		'label' => array('text' => __('Select format')),
+		'options' => array('GIF', 'PNG', 'JPG')
+	));
+?>
+		<button type="button" class="btn"><i class="icon icon-arrow-down"></i> <?=__('Download logo')?></button>
+		<button type="button" class="btn"><i class="icon icon-arrow-down"></i> <?=__('Download all as ZIP')?></button>
+<?
+	echo $this->Form->end();
+?>
+
 	<div class="clearfix"></div>
 	<hr />
 <?
@@ -100,7 +123,7 @@
 </div>
 <script type="text/javascript">
 function onSelectLogo(src) {
-	$('#sampleLogo img').attr('src', src);
+	$('#sampleLogo').attr('src', src);
 }
 
 $(document).ready(function(){

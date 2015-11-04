@@ -26,7 +26,7 @@ class SiteRouter extends Router {
 			);
 		} else {
 			$url = array(
-				'controller' => 'Article', 
+				'controller' => 'Articles', 
 				'action' => 'view',
 				'objectType' => $objectType,
 				'slug' => $article[$objectType]['slug']

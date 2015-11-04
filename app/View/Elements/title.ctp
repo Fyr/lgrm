@@ -1,1 +1,1 @@
-<h2><?=$pageTitle?></h2>
+<h1><?=$pageTitle?></h1>
