@@ -35,7 +35,7 @@ class AppController extends Controller {
 			'Products' => array('label' => __('Products'), 'href' => array('controller' => 'SiteProducts', 'action' => 'index', 'objectType' => 'Product')),
 			'Articles' => array('label' => __('Articles'), 'href' => array('controller' => 'Articles', 'action' => 'index', 'objectType' => 'SiteArticle')),
 			'o-proekte' => array('label' => __('About us'), 'href' => array('controller' => 'pages', 'action' => 'view', 'o-proekte.html')),
-			'Contacts' => array('label' => __('Contacts'), 'href' => array('controller' => 'SiteContacts', 'action' => 'index'))
+			// 'Contacts' => array('label' => __('Contacts'), 'href' => array('controller' => 'SiteContacts', 'action' => 'index'))
 		);
 		$this->aBottomLinks = $this->aNavBar;
 		

@@ -101,3 +101,5 @@ hr { margin: 0 0 10px 0; }
     background-color: ##0088cc;
     background-image: linear-gradient(to bottom, #0088cc 0%, #0088cc 100%);
 }
+#sampleLogo { float: left; width: 60%; margin: 0 10px 10px 0; }
+#sampleLogo img { width: 100%; border: 1px solid #ddd; margin-bottom: 10px; }

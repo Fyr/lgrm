@@ -1,3 +1,4 @@
+<small>
 <ul class="breadcrumb">
 <?
 	foreach($aBreadCrumbs as $title => $url) {
@@ -13,3 +14,4 @@
 	}
 ?>
 </ul>
+</small>
