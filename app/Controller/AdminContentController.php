@@ -62,7 +62,7 @@ class AdminContentController extends AdminController {
 			$this->request->data('Seo.object_type', $objectType);
 		}
 		
-		if ($objectType == 'SubcategoryArticle' || $objectType == 'CarSubtype') {
+		if ($objectType == 'SubcategoryArticle') {
 			$this->request->data('Article.cat_id', $objectID);
 		}
 		
@@ -84,18 +84,6 @@ class AdminContentController extends AdminController {
 		// $objectID = $this->request->data('Article.object_id');
 		
 		if ($lSaved) {
-			/*
-			if ($objectType == 'Subcategory') {
-				// Save form for this subcategory
-				$form = $this->PMForm->getObject('Subcategory', $id);
-				if (!$form) {
-					$this->PMForm->save(array('object_type' => 'Subcategory', 'object_id' => $id));
-					$formID = $this->PMForm->id;
-				} else {
-					$formID = $form['PMForm']['id'];
-				}
-			}
-			*/
 			if ($objectType == 'SiteArticle') {
 				$subcategory = $this->SubcategoryArticle->findById($this->request->data('Article.subcat_id'));
 				$this->request->data('Article.cat_id', $subcategory['CategoryArticle']['id']);
@@ -121,26 +109,5 @@ class AdminContentController extends AdminController {
 		if (!$this->request->data('Article.sorting')) {
 			$this->request->data('Article.sorting', '0');
 		}
-		/*
-		if ($objectType == 'Subcategory' && $objectID) {
-        	$this->set('category', $this->Category->findById($objectID));
-        	$this->currMenu = 'Category';
-        	
-			$this->paginate = array(
-	    		'fields' => array('field_type', 'label', 'fieldset', 'required'),
-	    		'limit' => 100
-	    	);
-	    	$this->PCTableGrid->paginate('FormField');
-	    	
-	    	$formKeys = array();
-	    	if ($id) {
-	    		$form = $this->PMForm->getObject('Subcategory', $id);
-	    		$formKeys = $this->PMForm->getFormKeys(Hash::get($form, 'PMForm.id'));
-	    	}
-	    	$this->set('formKeys', $formKeys);
-		}
-		
-		*/
-		
 	}
 }

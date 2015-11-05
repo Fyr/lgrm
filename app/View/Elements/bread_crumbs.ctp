@@ -8,7 +8,7 @@
 <?
 		} else {
 ?>
-	<li class="active"><?=$title?></span></li>
+	<li class="active"><?=$title?></li>
 <?
 		}
 	}

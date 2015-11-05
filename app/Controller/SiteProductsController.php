@@ -8,7 +8,8 @@ App::uses('PHTimeHelper', 'Core.View/Helper');
 class SiteProductsController extends AppController {
 	public $name = 'SiteProducts';
 	public $uses = array('Media.Media', 'CategoryProduct', 'Product');
-	public $helpers = array('Media.PHMedia', 'Core.PHTime', 'Form.PHForm');
+	public $components = array('Recaptcha.Recaptcha');
+	public $helpers = array('Media.PHMedia', 'Core.PHTime', 'Recaptcha.Recaptcha');
 	
 	const PER_PAGE = 2;
 	
@@ -51,6 +52,8 @@ class SiteProductsController extends AppController {
 			return $this->redirect404();
 		}
 		$id = $article['Product']['id'];
+		$this->Product->save(array('id' => $id, 'views' => $article['Product']['views'] + 1, 'modified' => false));
+		
 		$this->set('article', $article);
 		$this->set('category', array('CategoryProduct' => $article['Category']));
 		$aMedia = $this->Media->getObjectList('Product', $id);
@@ -66,5 +69,32 @@ class SiteProductsController extends AppController {
 		$aMedia = Hash::combine($aMedia, '{n}.Media.id', '{n}', '{n}.Media.media_type');
 		$this->set('aMedia', $aMedia);
 		$this->set('aThumbs', $aThumbs);
+	}
+	
+	public function download($slug, $media_id) {
+		$article = $this->Product->findBySlug($slug);
+		$media = $this->Media->findById($media_id);
+		$media = Hash::get($media, 'Media');
+		if (!($article && $media && isset($media['id']) && $media['id'])) {
+			return $this->redirect404();
+		}
+		
+		App::uses('MediaPath', 'Media.Vendor');
+		$this->MediaPath = new MediaPath();
+		
+		$file = $this->MediaPath->getFileName($media['object_type'], $media['id'], 'noresize', $media['file'].$media['ext']);
+		if ($file && file_exists($file)) {
+			header('Content-Description: File Transfer');
+		    header('Content-Type: application/octet-stream');
+		    header('Content-Disposition: attachment; filename=logo-'.$slug.'-from-'.str_replace('.', '_', DOMAIN_TITLE).$media['ext']);
+		    header('Expires: 0');
+		    header('Cache-Control: must-revalidate');
+		    header('Pragma: public');
+		    header('Content-Length: '.filesize($file));
+		    readfile($file);
+		} else {
+			return $this->redirect404();
+		}
+
 	}
 }

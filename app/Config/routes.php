@@ -162,6 +162,14 @@ Router::connect('/logo/:category/:slug',
 	),
 	array('pass' => array('slug'))
 );
+Router::connect('/logo/:category/:slug/:media', 
+	array(
+		'controller' => 'SiteProducts', 
+		'action' => 'download',
+		'objectType' => 'Product',
+	),
+	array('pass' => array('slug', 'media'))
+);
 
 
 CakePlugin::routes();

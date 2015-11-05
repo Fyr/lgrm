@@ -54,7 +54,7 @@
 					<div class="span3 leftSidebar">
 						<?=$this->element('/SiteUI/categories')?>
 						<div class="block">
-							<div class="head">Heading</h4></div>
+							<div class="head">Heading</div>
 							<div class="description">
 								<h4><a href="#">Title</a></h4>
 								<img alt="" src="http://img.tyt.by/620x620s/n/10/0/delta2.jpg">

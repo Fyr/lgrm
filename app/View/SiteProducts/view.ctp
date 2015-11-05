@@ -2,24 +2,22 @@
 	$this->Html->css(array('/Table/css/grid', 'jquery.fancybox'), array('inline' => false));
 	$this->Html->script(array('vendor/jquery/jquery.fancybox.pack'), array('inline' => false));
 	
-	$title = $this->ObjectType->getTitle('view', $objectType);
 	echo $this->element('bread_crumbs', array('aBreadCrumbs' => array(
 		__('Home') => '/',
 		__('Products') => array('action' => 'index', 'objectType' => 'Product'),
 		$article['Category']['title'] => SiteRouter::url(array('CategoryProduct' => $article['Category'])),
 		$this->ObjectType->getTitle('view', $objectType) => ''
 	)));
-	echo $this->element('title', array('pageTitle' => __('Logotype %s', $article[$objectType]['title'])));
 	
-	$article[$objectType]['viewed'] = 1;
-	$article[$objectType]['updated'] = date('Y-m-d H:i:s', time() - DAY + 15 * MINUTE);
+	$logoTitle = $article[$objectType]['title'];
+	echo $this->element('title', array('pageTitle' => __('Logotype %s', $logoTitle)));
 ?>
 
 <div class="block">
 	<div class="pull-right">
 		<small>
-			<?=__('Updated')?>: <?=$this->PHTime->niceShort($article[$objectType]['updated'])?>&nbsp;&nbsp;
-			<?=__('Views')?>: <?=$article[$objectType]['viewed']?>&nbsp;&nbsp;
+			<?=__('Updated')?>: <?=$this->PHTime->niceShort($article[$objectType]['modified'])?>&nbsp;&nbsp;
+			<?=__('Views')?>: <?=$article[$objectType]['views']?>&nbsp;&nbsp;
 			<?=__('Images')?>: <?=(isset($aMedia['image'])) ? count($aMedia['image']) : '-'?>&nbsp;&nbsp;
 			<?=__('Logotypes in vector')?>: <?=(isset($aMedia['bin_file'])) ? $this->Html->link(count($aMedia['bin_file']), '#vector', array('style' => 'text-decoration: underline')) : '-'?><br/>
 		</small>
@@ -27,13 +25,21 @@
 	<div class="clearfix"></div>
 	<div style="margin: 0 10px 10px 0;">
 <?
-	if (isset($aMedia['image'])) {
+	if (isset($aMedia['image']) && $aMedia['image']) {
 		foreach($aMedia['image'] as $i => $media) {
 			$src = $this->Media->imageUrl($media, 'noresize');
 			$thumb = $this->Media->imageUrl($media, '100x100');
+			$url = $this->Html->url(array(
+				'controller' => 'SiteProducts', 
+				'action' => 'download',
+				'objectType' => 'Product',
+				'category' => $this->request->param('category'), 
+				'slug' => $this->request->param('slug'), 
+				'media' => $media['Media']['id']
+			));
 ?>
-		<a class="pull-left" href="javascript:void(0)" rel="logo" onclick="onSelectLogo(<?=$i?>, '<?=$src?>')">
-			<img class="media-object thumb" src="<?=$thumb?>" alt="<?=__('View logotype %s in original size', $article[$objectType]['title'])?>" />
+		<a class="pull-left" href="javascript:void(0)" rel="logo" onclick="onSelectLogo(<?=$i?>, '<?=$src?>', '<?=$url?>')">
+			<img class="media-object thumb" src="<?=$thumb?>" alt="<?=__('Preview image for logotype %s', $logoTitle)?>" />
 		</a>
 <?
 		}
@@ -41,13 +47,17 @@
 	</div>
 	<div class="clearfix"></div>
 	<div id="sampleLogo">
-		<img src="/img/sample-logo.png" alt="" />
+<?
+		list($media) = array_values($aMedia['image']);
+?>
+		<img src="<?=$this->Media->imageUrl($media, 'noresize')?>" alt="<?=__('Logotype %s in enlarged size', $logoTitle)?>" />
 	</div>
 	<div>
 <?
+		$style = '';
 		foreach($aMedia['image'] as $i => $media) {
 ?>
-		<div id="logoStats_<?=$i?>" class="logoStats" style="display: none">
+		<div id="logoStats_<?=$i?>" class="logoStats" <?=$style?>>
 			<small>
 				<?=__('Format')?>: <?=strtoupper(str_replace('.', '', $media['Media']['ext']))?><br/>
 				<?=__('Image size')?>: <?=$media['Media']['orig_w']?>x<?=$media['Media']['orig_h']?> px<br/>
@@ -56,6 +66,7 @@
 			</small>
 		</div>
 <?
+			$style = 'style="display: none"';
 		}
 		// echo $this->Form->create('Params', array('class' => 'form-horizontal'));
 		/*
@@ -77,7 +88,7 @@
 		*/
 ?>
 		<br/>
-		<button type="button" class="btn"><i class="icon icon-arrow-down"></i> <?=__('Download')?></button>
+		<a id="download" class="btn" href="javascript::void(0)"><i class="icon icon-download-alt"></i> <?=__('Download')?></a>
 	</div>
 	<div class="clearfix"></div>
 	<hr />
@@ -151,14 +162,14 @@
 	<?=$this->ArticleVars->body($article)?>
 </div>
 <script type="text/javascript">
-function onSelectLogo(n, src) {
+function onSelectLogo(n, src, url) {
 	$('#sampleLogo img').attr('src', src);
 	$('.logoStats').hide();
 	$('#logoStats_' + n).show();
+	$('#download').attr('href', url);
 }
 
 $(document).ready(function(){
-	$('.media-object.thumb:first').parent().click();
 	$('.fancybox').fancybox({
 		padding: 5
 	});
