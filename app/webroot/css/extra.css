@@ -103,3 +103,17 @@ hr { margin: 0 0 10px 0; }
 }
 #sampleLogo { float: left; width: 60%; margin: 0 10px 10px 0; }
 #sampleLogo img { width: 100%; border: 1px solid #ddd; margin-bottom: 10px; }
+
+.page-stats span { margin-right: 5px;}
+
+.logo-list .item { float: left; margin: 20px; width: 200px; }
+.logo-list .title { text-align: center; height: 3em; }
+.logo-list a.image { 
+	width: 200px;
+	border: 1px solid #ddd;
+	display: table-cell;
+	height: 150px;
+	text-align: center;
+	vertical-align: middle; 
+}
+.logo-list .page-stats span { display: block; }

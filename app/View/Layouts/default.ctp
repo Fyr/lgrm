@@ -39,7 +39,7 @@
 						<?=$this->element('/SiteUI/alphabet')?>
 						<form class="form-search pull-right">
 							<div class="input-append">
-								<input type="text" class="span2 search-query" placeholder="Поиск логотипа..." />
+								<input type="text" class="span2 search-query" placeholder="<?=__('Search logo...')?>" />
 								<button type="submit" class="btn"><i class="icon icon-search"></i></button>
 							</div>
 						</form>
@@ -54,12 +54,21 @@
 					<div class="span3 leftSidebar">
 						<?=$this->element('/SiteUI/categories')?>
 						<div class="block">
-							<div class="head">Heading</div>
+							<div class="head"><?=__('Hot news')?></div>
 							<div class="description">
-								<h4><a href="#">Title</a></h4>
-								<img alt="" src="http://img.tyt.by/620x620s/n/10/0/delta2.jpg">
-								<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-								<p class="text-right"><a class="btn btn-mini" href="#">Подробнее »</a></p>
+<?
+	$this->ArticleVars->init($lastNews, $url, $title, $teaser, $src, '150x');
+?>
+								<h4><a href="<?=$url?>"><?=$title?></a></h4>
+<?
+	if ($src) {
+?>
+								<img src="<?=$src?>" alt="<?=$title?>" />
+<?
+	}
+?>
+								<p><?=$teaser?></p>
+								<?=$this->element('more', compact('url'))?>
 							</div>
 						</div>
 					</div>
@@ -83,7 +92,6 @@
 			<div class="container">
 				<div class="row">
 					<div class="span3">
-						<a href="/"><?=DOMAIN_TITLE?></a>
 					</div>
 					<div class="span6">
 						<?=$this->element('SiteUI/bottom_links')?>
@@ -91,10 +99,10 @@
 					<div class="span3"></div>
 				</div>
 				<div class="row">
-					<small>Кауой-то маленький текст</small>
+					<small>&copy; Logonarium.ru <?=date('Y')?></small>
 				</div>
 			</div>
 		</div>
-<?=$this->element('sql_dump')?>
+<?//$this->element('sql_dump')?>
   </body>
 </html>

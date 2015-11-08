@@ -31,19 +31,18 @@ class AppModel extends Model {
 		return $query;
 	}
 	
-	public function loadModel($models) {
-		if (!is_array($models)) {
-			$models = array($models);
+	public function loadModel($modelClass = null, $id = null) {
+		list($plugin, $modelClass) = pluginSplit($modelClass, true);
+		
+		$this->{$modelClass} = ClassRegistry::init(array(
+			'class' => $plugin . $modelClass, 'alias' => $modelClass, 'id' => $id
+		));
+		if (!$this->{$modelClass}) {
+			throw new MissingModelException($modelClass);
 		}
-		foreach($models as $model) {
-			App::import('Model', $model);
-			if (strpos($model, '.') !== false) {
-				list($plugin, $model) = explode('.', $model);
-			}
-			$this->$model = new $model();
-		}
+		
+		return $this->{$modelClass};
 	}
-
 	
 	private function _getObjectConditions($objectType = '', $objectID = '') {
 		$conditions = array();

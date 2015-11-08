@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('AppModel', 'Model');
 App::uses('Product', 'Model');
 App::uses('Media', 'Media.Model');
 App::uses('PHMediaHelper', 'Media.View/Helper');
@@ -11,7 +12,7 @@ class SiteProductsController extends AppController {
 	public $components = array('Recaptcha.Recaptcha');
 	public $helpers = array('Media.PHMedia', 'Core.PHTime', 'Recaptcha.Recaptcha');
 	
-	const PER_PAGE = 2;
+	const PER_PAGE = 15;
 	
 	public function beforeFilter() {
 		$this->objectType = $this->getObjectType();
@@ -41,8 +42,11 @@ class SiteProductsController extends AppController {
 		if ($data = $this->request->data) {
 			$this->paginate['conditions'] = array_merge($this->paginate['conditions'], $this->postConditions($data));
 		}
-		$products = $this->paginate('Product');
-		$this->set('aArticles', $products);
+		$aProducts = $this->paginate('Product');
+		foreach($aProducts as &$article) {
+			$article = array_merge($article, $this->Product->getMedia($article['Product']['id']));
+		}
+		$this->set('aArticles', $aProducts);
 		$this->set('objectType', 'Product');
 	}
 	
@@ -53,9 +57,10 @@ class SiteProductsController extends AppController {
 		}
 		$id = $article['Product']['id'];
 		$this->Product->save(array('id' => $id, 'views' => $article['Product']['views'] + 1, 'modified' => false));
-		
+		$article = array_merge($article, $this->Product->getMedia($id));
 		$this->set('article', $article);
 		$this->set('category', array('CategoryProduct' => $article['Category']));
+		/*
 		$aMedia = $this->Media->getObjectList('Product', $id);
 		
 		// for bin-file we just upload an image with the same name + _thumb
@@ -69,6 +74,7 @@ class SiteProductsController extends AppController {
 		$aMedia = Hash::combine($aMedia, '{n}.Media.id', '{n}', '{n}.Media.media_type');
 		$this->set('aMedia', $aMedia);
 		$this->set('aThumbs', $aThumbs);
+		*/
 	}
 	
 	public function download($slug, $media_id) {

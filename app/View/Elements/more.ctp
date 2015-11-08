@@ -1,1 +1,1 @@
-<p class="text-right"><a class="btn btn-mini" href="<?=$url?>">Подробнее »</a></p>
+<p class="text-right"><a class="btn btn-mini" href="<?=$url?>"><?=(isset($title)) ? $title : __('more')?> »</a></p>

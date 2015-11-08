@@ -7,6 +7,7 @@ class AppHelper extends Helper {
 	}
 	
 	public function getObjectType($article) {
-		return $this->_View->request->param('objectType');
+		list($objectType) = array_keys($article);
+		return $objectType;
 	}
 }

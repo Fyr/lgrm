@@ -4,6 +4,48 @@ msgstr "Пользователь"
 msgid "Invalid username or password, try again"
 msgstr "Неправильное имя пользователя или пароль"
 
+msgid "Jan"
+msgstr "Янв"
+
+msgid "Feb"
+msgstr "Фев"
+
+msgid "Mar"
+msgstr "Мар"
+
+msgid "Apr"
+msgstr "Апр"
+
+msgid "May"
+msgstr "Май"
+
+msgid "Jun"
+msgstr "Июн"
+
+msgid "Jul"
+msgstr "Июл"
+
+msgid "Aug"
+msgstr "Авг"
+
+msgid "Sep"
+msgstr "Сен"
+
+msgid "Oct"
+msgstr "Окт"
+
+msgid "Nov"
+msgstr "Ноя"
+
+msgid "Dec"
+msgstr "Дек"
+
+msgid "Today"
+msgstr "Сегодня"
+
+msgid "Yesterday"
+msgstr "Вчера"
+
 msgid "Text"
 msgstr "Текст"
 
@@ -457,8 +499,8 @@ msgstr "Редактировать подкатегорию для статьи"
 msgid "Featured product"
 msgstr "Спец.предложение"
 
-msgid "Last added logotypes"
-msgstr "Последние добавленные логотипы"
+msgid "New logotypes"
+msgstr "Новые логотипы"
 
 msgid "View logotype %s in original size"
 msgstr "Просмотреть логотип %s в оригинальном размере"
@@ -469,45 +511,5 @@ msgstr "Просмотреть логотип %s в оригинальном р�
 msgid "Logo %s in vector"
 msgstr "Логотип %s в векторе"
 
-msgid "Jan"
-msgstr "Янв"
-
-msgid "Feb"
-msgstr "Фев"
-
-msgid "Mar"
-msgstr "Мар"
-
-msgid "Apr"
-msgstr "Апр"
-
-msgid "May"
-msgstr "Май"
-
-msgid "Jun"
-msgstr "Июн"
-
-msgid "Jul"
-msgstr "Июл"
-
-msgid "Aug"
-msgstr "Авг"
-
-msgid "Sep"
-msgstr "Сен"
-
-msgid "Oct"
-msgstr "Окт"
-
-msgid "Nov"
-msgstr "Ноя"
-
-msgid "Dec"
-msgstr "Дек"
-
-msgid "Today"
-msgstr "Сегодня"
-
-msgid "Yesterday"
-msgstr "Вчера"
-
+msgid "more"
+msgstr "подробнее"

@@ -1,6 +1,8 @@
 <?
 	$this->Html->css(array('/Table/css/grid', 'jquery.fancybox'), array('inline' => false));
 	$this->Html->script(array('vendor/jquery/jquery.fancybox.pack'), array('inline' => false));
+	$aMedia = $article['MediaTypes'];
+	$aThumbs = $article['Thumbs'];
 	
 	echo $this->element('bread_crumbs', array('aBreadCrumbs' => array(
 		__('Home') => '/',
@@ -16,16 +18,14 @@
 <div class="block">
 	<div class="pull-right">
 		<small>
-			<?=__('Updated')?>: <?=$this->PHTime->niceShort($article[$objectType]['modified'])?>&nbsp;&nbsp;
-			<?=__('Views')?>: <?=$article[$objectType]['views']?>&nbsp;&nbsp;
-			<?=__('Images')?>: <?=(isset($aMedia['image'])) ? count($aMedia['image']) : '-'?>&nbsp;&nbsp;
-			<?=__('Logotypes in vector')?>: <?=(isset($aMedia['bin_file'])) ? $this->Html->link(count($aMedia['bin_file']), '#vector', array('style' => 'text-decoration: underline')) : '-'?><br/>
+			<?=$this->element('page_stats')?>
 		</small>
 	</div>
 	<div class="clearfix"></div>
 	<div style="margin: 0 10px 10px 0;">
 <?
 	if (isset($aMedia['image']) && $aMedia['image']) {
+		list($_media) = array_values($aMedia['image']);
 		foreach($aMedia['image'] as $i => $media) {
 			$src = $this->Media->imageUrl($media, 'noresize');
 			$thumb = $this->Media->imageUrl($media, '100x100');
@@ -47,10 +47,7 @@
 	</div>
 	<div class="clearfix"></div>
 	<div id="sampleLogo">
-<?
-		list($media) = array_values($aMedia['image']);
-?>
-		<img src="<?=$this->Media->imageUrl($media, 'noresize')?>" alt="<?=__('Logotype %s in enlarged size', $logoTitle)?>" />
+		<img src="<?=$this->Media->imageUrl($_media, 'noresize')?>" alt="<?=__('Logotype %s in enlarged size', $logoTitle)?>" />
 	</div>
 	<div>
 <?
@@ -58,12 +55,10 @@
 		foreach($aMedia['image'] as $i => $media) {
 ?>
 		<div id="logoStats_<?=$i?>" class="logoStats" <?=$style?>>
-			<small>
 				<?=__('Format')?>: <?=strtoupper(str_replace('.', '', $media['Media']['ext']))?><br/>
 				<?=__('Image size')?>: <?=$media['Media']['orig_w']?>x<?=$media['Media']['orig_h']?> px<br/>
 				<?=__('File size')?>: <?=$this->PHMedia->MediaPath->filesizeFormat($media['Media']['orig_fsize'])?><br/>
 				<?=__('Downloaded')?>: <?=($media['Media']['downloaded']) ? $media['Media']['downloaded'] : '-'?><br/>
-			</small>
 		</div>
 <?
 			$style = 'style="display: none"';
@@ -86,9 +81,18 @@
 <?
 		echo $this->Form->end();
 		*/
+		$url = $this->Html->url(array(
+			'controller' => 'SiteProducts', 
+			'action' => 'download',
+			'objectType' => 'Product',
+			'category' => $this->request->param('category'), 
+			'slug' => $this->request->param('slug'), 
+			'media' => $_media['Media']['id']
+		));
 ?>
 		<br/>
-		<a id="download" class="btn" href="javascript::void(0)"><i class="icon icon-download-alt"></i> <?=__('Download')?></a>
+		<input type="checkbox" id="agree" onchange="$('#download').removeClass('disabled'); if (!this.checked) { $('#download').addClass('disabled'); }" style="position: relative; top: -2px;"/> <?=__('I agree with %s', $this->Html->link(__('Terms of use'), array('controller' => 'Pages', 'action' => 'view', 'disclaimer')))?><br/>
+		<a id="download" class="btn disabled" href="<?=$url?>" onclick="if ($('#agree:checked').length) {return true;} else {return false;}" style="margin: 10px 0"><i class="icon icon-download-alt"></i> <?=__('Download')?></a>
 	</div>
 	<div class="clearfix"></div>
 	<hr />
@@ -159,7 +163,15 @@
 <?
 	}
 ?>
-	<?=$this->ArticleVars->body($article)?>
+	<div class="article-body">
+<?
+	if ($article[$objectType]['body']) {
+		echo $this->ArticleVars->body($article);
+	} else {
+		echo 'Текст для логотипа по умолчанию';
+	}
+?>
+	</div>
 </div>
 <script type="text/javascript">
 function onSelectLogo(n, src, url) {
@@ -170,6 +182,7 @@ function onSelectLogo(n, src, url) {
 }
 
 $(document).ready(function(){
+	$('#agree').get(0).checked = false;
 	$('.fancybox').fancybox({
 		padding: 5
 	});

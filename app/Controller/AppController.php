@@ -1,5 +1,11 @@
 <?php
 App::uses('Controller', 'Controller');
+App::uses('AppModel', 'Model');
+App::uses('Media', 'Media.Model');
+App::uses('News', 'Model');
+App::uses('Product', 'Model');
+App::uses('CategoryProduct', 'Model');
+
 class AppController extends Controller {
 	public $paginate;
 	public $aNavBar = array(), $aBottomLinks = array(), $currMenu = '', $currLink = '', $pageTitle = '', $aBreadCrumbs = array();
@@ -34,10 +40,14 @@ class AppController extends Controller {
 			'News' => array('label' => __('News'), 'href' => array('controller' => 'Articles', 'action' => 'index', 'objectType' => 'News')),
 			'Products' => array('label' => __('Products'), 'href' => array('controller' => 'SiteProducts', 'action' => 'index', 'objectType' => 'Product')),
 			'Articles' => array('label' => __('Articles'), 'href' => array('controller' => 'Articles', 'action' => 'index', 'objectType' => 'SiteArticle')),
-			'o-proekte' => array('label' => __('About us'), 'href' => array('controller' => 'pages', 'action' => 'view', 'o-proekte.html')),
+			'o-proekte' => array('label' => __('About us'), 'href' => array('controller' => 'Pages', 'action' => 'view', 'o-proekte')),
 			// 'Contacts' => array('label' => __('Contacts'), 'href' => array('controller' => 'SiteContacts', 'action' => 'index'))
 		);
 		$this->aBottomLinks = $this->aNavBar;
+		
+		$this->loadModel('Page');
+		$article = $this->Page->findBySlug('disclaimer');
+		$this->aBottomLinks['disclaimer'] = array('label' => $article['Page']['title'], 'href' => array('controller' => 'pages', 'action' => 'view', 'disclaimer'));
 		
 		$this->currMenu = $this->_getCurrMenu();
 	    $this->currLink = $this->currMenu;
@@ -77,11 +87,12 @@ class AppController extends Controller {
 		$this->loadModel('CategoryProduct');
 		$aCategories = $this->CategoryProduct->find('all'); //getObjectOptions();
 		$this->set('aCategories', $aCategories);
-		/*
-		$this->loadModel('CategoryProduct');
-		$aCategories = $this->CategoryProduct->find('list'); //getObjectOptions();
-		$this->set('aCategories', $aCategories);
-		*/
+		
+		$this->loadModel('News');
+		$conditions = array('News.published' => 1);
+		$order = 'News.created DESC';
+		$lastNews = $this->News->find('first', compact('conditions', 'order'));
+		$this->set('lastNews', $lastNews);
 	}
 	
 	/**

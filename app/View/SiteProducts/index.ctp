@@ -12,32 +12,43 @@
 	echo $this->element('title', array('pageTitle' => $title));
 ?>
 <div class="block">
-	
+	<div class="logo-list clearfix">
 <?
 	foreach($aArticles as $i => $article) {
 		$this->ArticleVars->init($article, $url, $title, $teaser, $src, '150x');
 ?>
-	<div class="media">
+		<div class="item clearfix">
+			<div class="title">
+				<a href="<?=$url?>"><?=__('Logotype %s', $title)?></a>
+			</div>
+			<a class="image" href="<?=$url?>" title="<?=__('Download logo %s', $title);?>">
+				<img class="media-object" src="<?=$src?>" alt="<?=__('Download logo %s', $title);?>" />
+			</a>
+			<small>
 <?
-		if ($src) {
-?>
-		<a class="pull-left" href="<?=$url?>">
-			<img class="media-object thumb" src="<?=$src?>" alt="<?=$title?>">
-		</a>
-<?
+		if (!isset($category)) {
+			echo __('Category').': '.$this->Html->link($article['Category']['title'], SiteRouter::url(array('CategoryProduct' => $article['Category']))).'<br/>';
 		}
 ?>
-		<div class="media-body">
-			<h4 class="media-heading"><a href="<?=$url?>"><?=$title?></a></h4>
-			<p><?=$teaser?></p>
-			<?=$this->element('more', compact('url'))?>
+				<?=$this->element('page_stats', compact('article'))?>
+			</small>
+			<?=$this->element('more', array('url' => $url, 'title' => __('Download')))?>
 		</div>
-	</div>
-	<hr />
 <?
 	}
 ?>
+	</div>
 </div>
 <?
 	echo $this->element('paginate');
+	$page = $this->request->param('page');
+	if (isset($category)) {
+		if (!$page || $page == 1) {
+			$relText = sprintf('Релевантный текст по умолчанию для категории логотипа `%s`', $category['CategoryProduct']['title']);
+			if (!(trim($category['CategoryProduct']['body']))) {
+				$category['CategoryProduct']['body'] = $relText;
+			}
+			echo $this->ArticleVars->body($category);
+		}
+	}
 ?>
