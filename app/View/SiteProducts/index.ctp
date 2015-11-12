@@ -1,21 +1,25 @@
 <?
 	$title = $this->ObjectType->getTitle('index', $objectType);
-	$aBreadCrumbs = array(__('Home') => '/');
-	if (isset($category)) {
-		$aBreadCrumbs[$title] = Router::url(array('action' => 'index', 'objectType' => 'Product'));
-		$aBreadCrumbs[$category['CategoryProduct']['title']] = '';
-		$title.= ': '.$category['CategoryProduct']['title'];
+	if ($q) {
+		echo $this->element('title', array('pageTitle' => __('Search results').' `'.$q.'`'));
 	} else {
-		$aBreadCrumbs[$title] = '';
+		$aBreadCrumbs = array(__('Home') => '/');
+		if (isset($category)) {
+			$aBreadCrumbs[$title] = Router::url(array('action' => 'index', 'objectType' => 'Product'));
+			$aBreadCrumbs[$category['CategoryProduct']['title']] = '';
+			$title.= ': '.$category['CategoryProduct']['title'];
+		} else {
+			$aBreadCrumbs[$title] = '';
+		}
+		echo $this->element('bread_crumbs', compact('aBreadCrumbs'));
+		echo $this->element('title', array('pageTitle' => $title));
 	}
-	echo $this->element('bread_crumbs', compact('aBreadCrumbs'));
-	echo $this->element('title', array('pageTitle' => $title));
 ?>
 <div class="block">
 	<div class="logo-list clearfix">
 <?
 	foreach($aArticles as $i => $article) {
-		$this->ArticleVars->init($article, $url, $title, $teaser, $src, '150x');
+		$this->ArticleVars->init($article, $url, $title, $teaser, $src, '150x150');
 ?>
 		<div class="item clearfix">
 			<div class="title">

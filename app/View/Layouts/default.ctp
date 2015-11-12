@@ -37,9 +37,9 @@
 					<div class="nav-collapse collapse">
 						<?=$this->element('/SiteUI/main_menu')?>
 						<?=$this->element('/SiteUI/alphabet')?>
-						<form class="form-search pull-right">
+						<form class="form-search pull-right" action="<?=$this->Html->url(array('controller' => 'SiteProducts', 'action' => 'index', 'objectType' => 'Product'))?>" method="get">
 							<div class="input-append">
-								<input type="text" class="span2 search-query" placeholder="<?=__('Search logo...')?>" />
+								<input type="text" name="q" class="span2 search-query" placeholder="<?=__('Search logo')?>..." value="<?=$this->request->query('q')?>" />
 								<button type="submit" class="btn"><i class="icon icon-search"></i></button>
 							</div>
 						</form>
@@ -103,6 +103,6 @@
 				</div>
 			</div>
 		</div>
-<?//$this->element('sql_dump')?>
+<?=$this->element('sql_dump')?>
   </body>
 </html>

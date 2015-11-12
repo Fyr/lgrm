@@ -125,7 +125,7 @@ msgid "File name"
 msgstr "Имя файла"
 
 msgid "File size"
-msgstr "Размер файла"
+msgstr "Обьем файла"
 
 msgid "Resolution"
 msgstr "Разрешение"
@@ -513,3 +513,69 @@ msgstr "Логотип %s в векторе"
 
 msgid "more"
 msgstr "подробнее"
+
+msgid "Updated"
+msgstr "Обновлено"
+
+msgid "Views"
+msgstr "Просмотры"
+
+msgid "Images"
+msgstr "Логотипы-картинки"
+
+msgid "Logotypes in vector"
+msgstr "Логотипы в векторе"
+
+msgid "Logotypes by categories"
+msgstr "Каталог логотипов"
+
+msgid "Edit Product category"
+msgstr "Редактировать категорию логотипа"
+
+msgid "Search logo"
+msgstr "Поиск логотипа"
+
+msgid "Hot news"
+msgstr "Новости"
+
+msgid "Download"
+msgstr "Скачать"
+
+msgid "Featured articles"
+msgstr "Полезные статьи"
+
+msgid "Format"
+msgstr "Формат логотипа"
+
+msgid "Image size"
+msgstr "Размеры изображения"
+
+msgid "Downloaded"
+msgstr "Скачано"
+
+msgid "Adjust size"
+msgstr "Настройка размеров"
+
+msgid "Select format"
+msgstr "Выбор формата"
+
+msgid "Download all as ZIP"
+msgstr "rus:Download all as ZIP!"
+
+msgid "Terms of use"
+msgstr "Условия пользования"
+
+msgid "Preview"
+msgstr "Предпросмотр"
+
+msgid "Downloaded, times"
+msgstr "Скачано, раз"
+
+msgid "exists"
+msgstr "есть"
+
+msgid "Search results"
+msgstr "Результаты поиска"
+
+msgid "Page not found"
+msgstr "Страница не найдена"

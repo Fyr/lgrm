@@ -35,11 +35,12 @@ class AdminController extends AppController {
 				array('label' => __('Upload counters'), 'href' => array('controller' => 'AdminUploadCsv', 'action' => 'index')),
 				array('label' => __('Upload new products'), 'href' => array('controller' => 'AdminUploadCsv', 'action' => 'uploadNewProducts')),
 			)),
-			*/
+			
 			'Settings' => array('label' => __('Settings'), 'href' => '', 'submenu' => array(
 				array('label' => __('System'), 'href' => array('controller' => 'AdminSettings', 'action' => 'index')),
 				array('label' => __('Slider'), 'href' => array('controller' => 'AdminSlider', 'action' => 'index'))
 			))
+			*/
 		);
 		$this->aBottomLinks = $this->aNavBar;
 	}

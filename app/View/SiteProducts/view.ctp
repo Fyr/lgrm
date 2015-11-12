@@ -56,7 +56,7 @@
 ?>
 		<div id="logoStats_<?=$i?>" class="logoStats" <?=$style?>>
 				<?=__('Format')?>: <?=strtoupper(str_replace('.', '', $media['Media']['ext']))?><br/>
-				<?=__('Image size')?>: <?=$media['Media']['orig_w']?>x<?=$media['Media']['orig_h']?> px<br/>
+				<?=__('Image size')?>: <?=$media['Media']['orig_w']?> &times; <?=$media['Media']['orig_h']?> px<br/>
 				<?=__('File size')?>: <?=$this->PHMedia->MediaPath->filesizeFormat($media['Media']['orig_fsize'])?><br/>
 				<?=__('Downloaded')?>: <?=($media['Media']['downloaded']) ? $media['Media']['downloaded'] : '-'?><br/>
 		</div>

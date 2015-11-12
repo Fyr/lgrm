@@ -59,4 +59,7 @@ class PagesController extends AppController {
 		
 		$this->currMenu = $slug;
 	}
+	
+	public function notExists() {
+	}
 }

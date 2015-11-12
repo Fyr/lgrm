@@ -12,7 +12,7 @@ class SiteProductsController extends AppController {
 	public $components = array('Recaptcha.Recaptcha');
 	public $helpers = array('Media.PHMedia', 'Core.PHTime', 'Recaptcha.Recaptcha');
 	
-	const PER_PAGE = 15;
+	const PER_PAGE = 2;
 	
 	public function beforeFilter() {
 		$this->objectType = $this->getObjectType();
@@ -35,14 +35,26 @@ class SiteProductsController extends AppController {
 			'page' => $this->request->param('page'),
 			'order' => 'Product.created DESC'
 		);
-		if ($catSlug) {
-			$this->request->data('Category.slug', $catSlug);
+		
+		if ($q = $this->request->query('q')) {
+			$this->paginate['conditions']['Product.title LIKE '] = '%'.$q.'%';
+		} elseif ($q = $this->request->query('L')) {
+			$this->paginate['conditions']['Product.title LIKE '] = $q.'%';
+		} elseif ($q = $this->request->query('D')) {
+			$this->paginate['conditions'][] = 'LEFT(Product.title, 1) BETWEEN "0" AND "9"';
+			$q = '0-9';
+		} elseif ($catSlug) {
+			$this->paginate['conditions']['Category.slug'] = $catSlug;
 			$this->set('category', $this->CategoryProduct->findBySlug($catSlug));
 		}
-		if ($data = $this->request->data) {
-			$this->paginate['conditions'] = array_merge($this->paginate['conditions'], $this->postConditions($data));
-		}
+		$this->set('q', $q);
+		
+		
 		$aProducts = $this->paginate('Product');
+		if (!$aProducts) {
+			return $this->redirect404();
+		}
+		
 		foreach($aProducts as &$article) {
 			$article = array_merge($article, $this->Product->getMedia($article['Product']['id']));
 		}

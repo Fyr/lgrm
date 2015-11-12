@@ -104,10 +104,10 @@ class AdminContentController extends AdminController {
 			$this->set('categoryArticle', $this->CategoryArticle->findById($objectID));
 		}
 		
-		// $this->currMenu = 'Content';
-		
 		if (!$this->request->data('Article.sorting')) {
 			$this->request->data('Article.sorting', '0');
 		}
+		
+		$this->currMenu = ($objectType == 'Product' || $objectType == 'CategoryProduct') ? 'Catalog' : 'Content';
 	}
 }

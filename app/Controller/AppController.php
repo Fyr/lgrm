@@ -8,7 +8,8 @@ App::uses('CategoryProduct', 'Model');
 
 class AppController extends Controller {
 	public $paginate;
-	public $aNavBar = array(), $aBottomLinks = array(), $currMenu = '', $currLink = '', $pageTitle = '', $aBreadCrumbs = array();
+	public $aNavBar = array(), $aBottomLinks = array(), $currMenu = '', $currLink = '';
+	public $pageTitle = '', $aBreadCrumbs = array(), $seo = array();
 	
 	public function __construct($request = null, $response = null) {
 		$this->_beforeInit();
@@ -76,6 +77,7 @@ class AppController extends Controller {
 		$this->set('currLink', $this->currLink);
 		$this->set('pageTitle', $this->pageTitle);
 		$this->set('aBreadCrumbs', $this->aBreadCrumbs);
+		$this->set('seo', $this->seo);
 		
 		$this->beforeRenderLayout();
 	}
@@ -109,5 +111,10 @@ class AppController extends Controller {
 	protected function getObjectType() {
 		$objectType = $this->request->param('objectType');
 		return ($objectType) ? $objectType : 'SiteArticle';
+	}
+	
+	protected function redirect404() {
+		$this->autoRender = false;
+		return $this->redirect(array('controller' => 'Pages', 'action' => 'notExists'));
 	}
 }
