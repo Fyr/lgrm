@@ -1,5 +1,5 @@
 <?php
-Router::parseExtensions('json');
+Router::parseExtensions('json', 'xml');
 /*
 Router::connectNamed(
     array('page' => '[\d]+'),

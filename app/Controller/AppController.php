@@ -103,7 +103,7 @@ class AppController extends Controller {
 	 * @param str $msg
 	 * @param str $type - must be 'success', 'error' or empty
 	 */
-	protected function setFlash($msg, $type = 'info') {
+	public function setFlash($msg, $type = 'info') {
 		$this->Session->setFlash($msg, 'default', array(), $type);
 	}
 
@@ -113,8 +113,9 @@ class AppController extends Controller {
 		return ($objectType) ? $objectType : 'SiteArticle';
 	}
 	
-	protected function redirect404() {
+	public function redirect404() {
 		$this->autoRender = false;
-		return $this->redirect(array('controller' => 'Pages', 'action' => 'notExists'));
+		return $this->redirect(array('controller' => 'pages', 'action' => 'notExists'));
 	}
+
 }

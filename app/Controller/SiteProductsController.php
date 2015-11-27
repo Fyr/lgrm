@@ -12,7 +12,7 @@ class SiteProductsController extends AppController {
 	public $components = array('Recaptcha.Recaptcha');
 	public $helpers = array('Media.PHMedia', 'Core.PHTime', 'Recaptcha.Recaptcha');
 	
-	const PER_PAGE = 2;
+	const PER_PAGE = 15;
 	
 	public function beforeFilter() {
 		$this->objectType = $this->getObjectType();
@@ -33,7 +33,7 @@ class SiteProductsController extends AppController {
 			'conditions' => array('Product.published' => 1),
 			'limit' => self::PER_PAGE, 
 			'page' => $this->request->param('page'),
-			'order' => 'Product.created DESC'
+			'order' => array('Product.views' => 'DESC', 'Product.created' => 'DESC')
 		);
 		
 		if ($q = $this->request->query('q')) {

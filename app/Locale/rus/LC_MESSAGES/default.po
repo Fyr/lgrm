@@ -499,6 +499,9 @@ msgstr "Редактировать подкатегорию для статьи"
 msgid "Featured product"
 msgstr "Спец.предложение"
 
+msgid "Logotype"
+msgstr "Логотип"
+
 msgid "New logotypes"
 msgstr "Новые логотипы"
 
@@ -565,6 +568,9 @@ msgstr "rus:Download all as ZIP!"
 msgid "Terms of use"
 msgstr "Условия пользования"
 
+msgid "terms of use"
+msgstr "условиями пользования"
+
 msgid "Preview"
 msgstr "Предпросмотр"
 
@@ -579,3 +585,11 @@ msgstr "Результаты поиска"
 
 msgid "Page not found"
 msgstr "Страница не найдена"
+
+msgid "Logo in PNG"
+msgstr "Логотип в PNG"
+
+msgid "I agree with %s"
+msgstr "Я согласен с %s"
+
+

@@ -32,7 +32,7 @@ class AdminContentController extends AdminController {
         		'fields' => array('title', 'slug'),
         	),
         	'Product' => array(
-        		'fields' => array('title', 'slug', 'featured'),
+        		'fields' => array('created', 'title', 'slug', 'featured'),
         	),
         );
         

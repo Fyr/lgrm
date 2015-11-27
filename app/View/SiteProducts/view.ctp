@@ -91,7 +91,7 @@
 		));
 ?>
 		<br/>
-		<input type="checkbox" id="agree" onchange="$('#download').removeClass('disabled'); if (!this.checked) { $('#download').addClass('disabled'); }" style="position: relative; top: -2px;"/> <?=__('I agree with %s', $this->Html->link(__('Terms of use'), array('controller' => 'Pages', 'action' => 'view', 'disclaimer')))?><br/>
+		<input type="checkbox" id="agree" onchange="$('#download').removeClass('disabled'); if (!this.checked) { $('#download').addClass('disabled'); }" style="position: relative; top: -2px;"/> <?=__('I agree with %s', $this->Html->link(__('terms of use'), array('controller' => 'Pages', 'action' => 'view', 'disclaimer')))?><br/>
 		<a id="download" class="btn disabled" href="<?=$url?>" onclick="if ($('#agree:checked').length) {return true;} else {return false;}" style="margin: 10px 0"><i class="icon icon-download-alt"></i> <?=__('Download')?></a>
 	</div>
 	<div class="clearfix"></div>
