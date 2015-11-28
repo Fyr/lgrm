@@ -114,8 +114,9 @@ class AppController extends Controller {
 	}
 	
 	public function redirect404() {
-		$this->autoRender = false;
-		return $this->redirect(array('controller' => 'pages', 'action' => 'notExists'));
+		// return $this->redirect(array('controller' => 'pages', 'action' => 'notExists'), 404);
+		fdebug('redirect404');
+		throw new NotFoundException();
 	}
 
 }

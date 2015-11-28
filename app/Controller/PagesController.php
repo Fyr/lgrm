@@ -61,5 +61,9 @@ class PagesController extends AppController {
 	}
 	
 	public function notExists() {
+		// http_response_code(404);
+		// $this->response->header('HTTP/1.0 404 Not Found');
+		$this->response->statusCode(404);
+		$this->response->send();
 	}
 }

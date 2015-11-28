@@ -592,4 +592,5 @@ msgstr "Логотип в PNG"
 msgid "I agree with %s"
 msgstr "Я согласен с %s"
 
-
+msgid "Error!"
+msgstr "Ошибка!"
